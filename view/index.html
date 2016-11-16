@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="UTF-8">
+
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
+    <link rel="stylesheet" type="text/css" href="../public/styles/styles.css">
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js" integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa" crossorigin="anonymous"></script>
+</head>
+
+<body>
+    <div class="container-fluid">
+        <div class="header row">
+            <div class="row headerBar"></div>
+            <div class="col-md-3 profileLeft">
+                <div id="profilePicture" class=""></div>
+                <button id="follow" class="btn btn-success">Follow</button>
+            </div>
+            <div class="col-md-6 info">
+                <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Aliquam sem nisl, auctor sed lorem sed, consequat elementum metus. In hac habitasse platea dictumst. Integer auctor sagittis massa eu pulvinar. Quisque feugiat dolor non ipsum vehicula
+                    maximus ac sed neque. Nulla ligula ipsum, finibus ut dolor eget, pellentesque imperdiet tortor. Maecenas condimentum, tortor at venenatis luctus, ligula sem faucibus ipsum, in vestibulum libero libero vitae libero. Mauris consectetur
+                    lorem sit amet lacus vehicula congue. Cras a congue turpis, in lobortis neque. Mauris in sollicitudin orci.</p>
+            </div>
+            <div class="col-md-3">
+                <ul class="menuBar">
+                    <li><a href="#">Recently added WTDs</a></li>
+                    <li><a href="#">My WTDs</a></li>
+                    <li><a href="#">Followers</a></li>
+                    <li><a href="#">Following</a></li>
+                </ul>
+            </div>
+        </div>
+        <hr>
+        <div class="row">
+            <p>Don't know What To Do? <a>Ask your Friends!</a></p>
+            <form>
+                <p>New WTD</p>
+                <label for="city">Enter the City you are interested in:</label>
+                <input id="city" type="text" placeholder="San Francisco"></input>
+                <label for="time">Select a time interval:</label> Start:
+                <input id="time" type="time"></input>
+                Finish:<input id="time" type="time"></input>
+                <label for="budget">Enter budget:</label>
+                <input id="budget" type="text" placeholder="$200"></input>
+                <label for="togetherWith">Who do you want to go with:</label>
+                <select id="togetherWith">
+                   <option value = "Alone">Alone</option>
+                   <option value = "Friend">With friend/friends</option>
+                   <option value = "GFBF">Girlfriend/Boyfriend</option>
+                   <option value = "Family">Family</option>
+                 </select>
+                 <label for="detailes">Add your detailed imformation:</label>
+                 <textarea id="details" type="text"></textarea>
+                 <input type="submit" value="POST this WTD" class="btn btn-primary"></input>
+            </form>
+        </div>
+    </div>
+</body>
+
+</html>

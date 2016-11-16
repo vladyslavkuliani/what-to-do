@@ -1,0 +1,39 @@
+body{
+  background: #F5F8FA;
+}
+
+.headerBar{
+  height: 60px;
+  background: rgba(0,0,0, .6);
+  margin-bottom: 20px;
+}
+
+#profilePicture {
+    height: 200px;
+    width: 200px;
+    border-radius: 5px;
+    margin: 0 auto;
+    background-image: url("../images/profilePicture.jpg");
+    background-size: cover;
+    background-position: center;
+}
+
+#follow{
+  width: 200px;
+  margin-top: 10px;
+  font-size: medium;
+}
+
+.profileLeft{
+  border-radius: 5px;
+  text-align: center;
+}
+
+.menuBar{
+  list-style-type: none;
+  text-decoration: underline;
+}
+
+.info{
+  vertical-align: middle;
+}
