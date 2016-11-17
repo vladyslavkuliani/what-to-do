@@ -1,0 +1,29 @@
+body {
+    background: rgba(92, 184, 92, .6);
+}
+
+.login{
+    text-align: center;
+    margin-top: 20%;
+}
+
+.singUpForm{
+  text-align: center;
+  margin-top: 30px;
+  transition: 1s;
+  border: 2px solid black;
+}
+
+.logIn {
+    background: rgba(240,173,78, 1);
+    width: 100px;
+    height: 50px;
+    border-radius: 10px;
+}
+
+.signUp {
+    background: rgba(101, 57, 112, 1);
+    width: 100px;
+    height: 50px;
+    border-radius: 10px;
+}

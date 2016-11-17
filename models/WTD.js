@@ -1,6 +1,5 @@
 var mongoose = require('mongoose');
 var Schema = mongoose.Schema;
-var User = require('./user.js');
 
 var WTDSchema = Schema({
   date: String,
@@ -8,7 +7,6 @@ var WTDSchema = Schema({
   time: Date,
   budget: Number,
   with: String,
-  joingRequests: [User.schema],
   recommendations:[String]
 });
 

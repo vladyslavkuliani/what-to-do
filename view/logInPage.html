@@ -1,7 +1,36 @@
 <!DOCTYPE html>
 <html>
-  <head>
-  </head>
-  <body>
-  </body>
+
+<head>
+    <meta charset="UTF-8">
+
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
+    <link rel="stylesheet" type="text/css" href="/styles/logInPage.css">
+
+    <script src="https://code.jquery.com/jquery-3.1.1.js" integrity="sha256-16cdPddA6VdVInumRGo6IbivbERE8p7CQR3HzTBuELA=" crossorigin="anonymous"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js" integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa" crossorigin="anonymous"></script>
+    <script src="/script/logInPage.js"></script>
+</head>
+
+<body>
+    <div class="login">
+      <h1>Welcome to WTD</h1>
+      <form class="logInForm">
+        <label for="username">Username:</label>
+        <input id="username" name="userName" type="text" required></input><br>
+        <input type="submit" value="Log In" class="btn btn-success logIn"></input>
+        <input type="submit" value="Sign Up" class="btn btn-success signUp"></input>
+      </form>
+    </div>
+    <div>
+      <form class="singUpForm">
+        <label for="userName">Create your username:</label>
+        <input id="userName" type="text" name="userName" required></input><br>
+        <label for="fullName">Enter your full name:</label>
+        <input id="fullName" type="text" name="fullName" required></input><br>
+        <input class="btn btn-primary createNew" type="submit" value="Create new account"></input>
+      </form>
+    </div>
+</body>
+
 </html>

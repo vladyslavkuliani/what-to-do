@@ -1,18 +1,29 @@
 var mongoose = require('mongoose');
 var Schema = mongoose.Schema;
-var WTD = require('./WTD.js');
 
-var UserSchema = Scema({
+var UserSchema = Schema({
   userName: String,
   fullName: String,
   dob: String,
   email: String,
   phoneNumber: Number,
   languages: [String],
-  myWTDs: [WTD.schema],
-  newWTDs: [WTD.schema],
-  followers:[User.schema],
-  following: [User.schema]
+  myWTDs: [{
+    type: Schema.Types.ObjectId,
+    ref: 'WTD'
+  }],
+  newWTDs: [{
+    type: Schema.Types.ObjectId,
+    ref: 'WTD'
+  }],
+  followers:[{
+    type: Schema.Types.ObjectId,
+    ref: 'JoinTable'
+  }],
+  following: [{
+    type: Schema.Types.ObjectId,
+    ref: 'JoinTable'
+  }]
 });
 
 var User = mongoose.model('User', UserSchema);
