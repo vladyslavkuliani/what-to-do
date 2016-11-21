@@ -62,12 +62,14 @@ app.get('/profile/:id', function(req, res) {
       }
       else{
         db.JoinTable.findOne({followerId: req.session.userId, followedId: req.params.id}, function(err, succ){
-          if(succ === null){
-            res.render('users', {user: user});
-          }
-          else {
-            res.render('followingUsers', {user: user});
-          }
+          db.User.findOne({_id: req.session.userId}, function(err, currUser){
+            if(succ === null){
+              res.render('users', {user: user, loggedin: currUser});
+            }
+            else {
+              res.render('followingUsers', {user: user, loggedin: currUser});
+            }
+          });
         });
       }
     });
