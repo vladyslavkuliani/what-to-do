@@ -57,7 +57,19 @@ app.get('/userId', function(req, res){
 
 app.get('/profile/:id', function(req, res) {
     db.User.findOne({_id: req.params.id}).populate('myWTDs').exec(function(err, user) {
+      if(req.params.id === req.session.userId){
         res.render('index', {user: user});
+      }
+      else{
+        db.JoinTable.findOne({followerId: req.session.userId, followedId: req.params.id}, function(err, succ){
+          if(succ === null){
+            res.render('users', {user: user});
+          }
+          else {
+            res.render('followingUsers', {user: user});
+          }
+        });
+      }
     });
 });
 
@@ -86,7 +98,6 @@ app.post('/createWTD', function(req, res) {
 });
 
 app.post('/delete-post', function(req, res){
-  console.log(req.body.wtdId);
   db.User.findOne({_id: req.body.userId},function(err, user){
     if(err){return console.log(err);}
     var index = user.myWTDs.indexOf(req.body.wtdId);
@@ -119,6 +130,76 @@ app.get('/user', function(req, res){
   db.User.findOne({_id:req.session.userId}, function(err, user){
     res.json(user);
   });
+});
+
+app.post('/follow', function(req, res){
+  var newJoinTable = new db.JoinTable({
+    followerId: req.session.userId,
+    followedId: req.body.userId
+  });
+  newJoinTable.save();
+
+  db.User.findOne({_id: req.session.userId}, function(err, user){
+    user.following.push(req.body.userId);
+    user.save();
+  });
+
+  db.User.findOne({_id: req.body.userId}, function(err, user){
+    user.followers.push(req.session.userId);
+    user.save();
+  });
+
+  res.json({});
+});
+
+app.post('/unfollow', function(req, res){
+  db.User.findOne({_id:req.session.userId}, function(err, user){
+    var index = user.following.indexOf(req.body.userId);
+    user.following.splice(index, 1);
+    user.save();
+  });
+
+  db.User.findOne({_id:req.body.userId}, function(err, user){
+    var index = user.followers.indexOf(req.session.userId);
+    user.followers.splice(index, 1);
+    user.save();
+  });
+
+  db.JoinTable.remove({followerId:req.session.userId, followedId:req.body.userId}, function(err, succ) {
+    if(err){return console.log("Couldn't delete this JoinTable");}
+    console.log("JoinTable was successfully removed!");
+  });
+
+  res.json({});
+});
+
+app.get('/following', function(req, res){
+  var following = [];
+  db.User.findOne({_id: req.session.userId}, function(err, user){
+    user.following.forEach(function(followingId){
+      db.User.findOne({_id:followingId}, function(err, user1){
+        following.push(user1);
+      });
+    });
+    res.render('searchUsers', {users: following});
+  });
+});
+
+app.get('/followers', function(req,res){
+  var followers = [];
+  db.User.findOne({_id: req.session.userId}, function(err, user){
+    user.followers.forEach(function(follower){
+      db.User.findOne({_id:follower}, function(err, user1){
+        followers.push(user1);
+      });
+    });
+    res.render('searchUsers', {users: followers});
+  });
+});
+
+app.post('/logout', function(req, res){
+  req.session.userId = null;
+  res.json({});
 });
 
 app.listen(process.env.PORT || 3000, function() {

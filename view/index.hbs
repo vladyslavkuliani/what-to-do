@@ -14,14 +14,16 @@
 </head>
 
 <body>
-  <div class="row headerBar" data-userId= {{user._id}}></div>
+  <div class="row headerBar" data-userId= {{user._id}}>
+    <p class="logOut">Log Out</p>
+  </div>
   <div class="">
       <ul class="menuBar">
           <li><a href="/find-friends" class="otherUsers">See Other Users</a></li>
           <li><a href="#">Recently added WTDs</a></li>
           <li><a href="#" class="myProfile" >Home</a></li>
-          <li><a href="#">Followers</a></li>
-          <li><a href="#">Following</a></li>
+          <li><a href="/followers">Followers</a></li>
+          <li><a href="/following">Following</a></li>
       </ul>
   </div>
     <div class="container-fluid content">
@@ -29,7 +31,7 @@
             <!-- <div class="row headerBar"></div> -->
             <div class="col-md-2 col-md-offset-1 profileLeft">
                 <div id="profilePicture" style="background-image: url({{user.profilePicture}})"></div>
-                <button id="follow" class="btn btn-success">Follow</button>
+                <button id="edit" class="btn btn-info">Edit</button>
             </div>
             <div class="col-md-6 info">
                 <p>{{user.fullName}}</p>

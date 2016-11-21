@@ -19,7 +19,7 @@ body{
     background-position: center;
 }
 
-#follow{
+#follow, #edit{
   width: 200px;
   margin-top: 10px;
   margin-bottom: 20px;
@@ -66,4 +66,22 @@ body{
 
 .content2{
   background: white;
+}
+
+.logOut{
+  border: 2px solid white;
+  border-radius: 5px;
+  width: 110px;
+  height: 40px;
+  text-align: center;
+  color: white;
+  font-size: 20px;
+  padding-top: 5px;
+  float: right;
+  margin: 10px 20px 0 0;
+}
+
+.logOut:hover{
+  background: rgba(101, 57, 112, 1);
+  cursor: pointer;
 }

@@ -21,21 +21,39 @@
       <ul class="menuBar">
           <li><a href="/find-friends" class="otherUsers">See Other Users</a></li>
           <li><a href="#">Recently added WTDs</a></li>
-          <li><a href="#" class="myProfile">Home</a></li>
+          <li><a href="#" class="myProfile" >Home</a></li>
           <li><a href="/followers">Followers</a></li>
           <li><a href="/following">Following</a></li>
       </ul>
   </div>
-    <div class="container content2">
-      {{#each users}}
-          <div class="row">
-              <div class="user col-md-6 ">
-                  <img class="userSearchPicture" src= {{profilePicture}} user-id={{_id}}></img>
-                  <p><a class="userNameLink" user-id={{_id}}>{{fullName}}</a></p>
-              </div>
-          </div>
-          <hr>
-      {{/each}}
+    <div class="container-fluid content">
+        <div class="header row">
+            <!-- <div class="row headerBar"></div> -->
+            <div class="col-md-2 col-md-offset-1 profileLeft">
+                <div id="profilePicture" style="background-image: url({{user.profilePicture}})"></div>
+                <button id="follow" class="btn btn-success btn-info">Unfollow</button>
+            </div>
+            <div class="col-md-6 info">
+                <p>{{user.fullName}}</p>
+                <p>Date of birth:{{user.dob}}<a>Edit</a></p>
+                <p>Email:{{user.email}}</p>
+                <p>Phone Number:{{user.phoneNumber}}</p>
+                <p>Languages:{{user.languages}}</p>
+            </div>
+        </div>
+        <hr>
+
+        <div id="newWTD">
+        </div>
+
+        {{#each user.myWTDs}}
+            <div class="row WTD" wtd-id={{_id}}>
+                <div class="dataWTD col-md-6 col-md-offset-3" >
+                    <img class="postImg" src= {{../user.profilePicture}}></img>
+                    <p>{{city}}!!!SHOULD BE HERE!!!</p>
+                </div>
+            </div>
+        {{/each}}
     </div>
 </body>
 
