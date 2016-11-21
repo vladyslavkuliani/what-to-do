@@ -2,11 +2,12 @@ var mongoose = require('mongoose');
 var Schema = mongoose.Schema;
 
 var WTDSchema = Schema({
-  date: String,
   city: String,
-  time: Date,
+  timeStart: String,
+  timeEnd: String,
   budget: Number,
   with: String,
+  details: String,
   recommendations:[String]
 });
 

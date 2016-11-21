@@ -4,7 +4,7 @@ body{
 
 .headerBar{
   height: 60px;
-  background: rgba(92, 184, 92, .7);
+  background: rgba(92, 184, 92, 1);
   margin-bottom: 20px;
 }
 
@@ -13,7 +13,8 @@ body{
     width: 200px;
     border-radius: 5px;
     margin: 0 auto;
-    background-image: url("../images/profilePicture.jpg");
+    margin-top: 20px;
+    background-image: url("../images/defaultProfilePicture.jpg");
     background-size: cover;
     background-position: center;
 }
@@ -21,12 +22,14 @@ body{
 #follow{
   width: 200px;
   margin-top: 10px;
+  margin-bottom: 20px;
   font-size: medium;
 }
 
 .profileLeft{
-  border-radius: 5px;
+  border-radius: 2px;
   text-align: center;
+  background: white;
 }
 
 .menuBar{
@@ -36,4 +39,31 @@ body{
 
 .info{
   vertical-align: middle;
+}
+
+.dataWTD{
+  height: 200px;
+  background: white;
+}
+
+.WTD{
+    margin-top: 20px;
+}
+
+.postImg{
+  width: 50px;
+  height: 50px;
+}
+
+.userSearchPicture{
+  width: 100px;
+  height: 100px;
+}
+
+.user{
+  /*background: white;*/
+}
+
+.content2{
+  background: white;
 }

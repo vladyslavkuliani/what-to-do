@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="UTF-8">
+
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
+    <link rel="stylesheet" type="text/css" href="/styles/styles.css">
+
+    <script src="https://code.jquery.com/jquery-3.1.1.js" integrity="sha256-16cdPddA6VdVInumRGo6IbivbERE8p7CQR3HzTBuELA=" crossorigin="anonymous"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js" integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa" crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/handlebars.js/4.0.6/handlebars.js"></script>
+    <script src="/script/script.js"></script>
+</head>
+
+<body>
+  <div class="row headerBar" data-userId= {{user._id}}></div>
+  <div class="">
+      <ul class="menuBar">
+          <li><a href="/find-friends" class="otherUsers">See Other Users</a></li>
+          <li><a href="#">Recently added WTDs</a></li>
+          <li><a href="#" class="myProfile" >Home</a></li>
+          <li><a href="#">Followers</a></li>
+          <li><a href="#">Following</a></li>
+      </ul>
+  </div>
+    <div class="container-fluid content">
+        <div class="header row">
+            <!-- <div class="row headerBar"></div> -->
+            <div class="col-md-2 col-md-offset-1 profileLeft">
+                <div id="profilePicture" style="background-image: url({{user.profilePicture}})"></div>
+                <button id="follow" class="btn btn-success">Follow</button>
+            </div>
+            <div class="col-md-6 info">
+                <p>{{user.fullName}}</p>
+                <p>Date of birth:{{user.dob}}<a>Edit</a></p>
+                <p>Email:{{user.email}}</p>
+                <p>Phone Number:{{user.phoneNumber}}</p>
+                <p>Languages:{{user.languages}}</p>
+            </div>
+        </div>
+        <hr>
+        <div class="row">
+            <p>Don't know What To Do? <a>Ask your Friends!</a></p>
+            <form class="newWTD">
+                <p>New WTD</p>
+                <label for="city">Enter the City you are interested in:</label>
+                <input id="city" name="city" type="text" placeholder="San Francisco"></input>
+                <label for="time">Select a time interval:</label> Start:
+                <input id="time" name="timeStart" type="time"></input>
+                Finish:<input id="time" name="timeEnd" type="time"></input>
+                <label for="budget">Enter budget:</label>
+                <input id="budget" name="budget" type="text" placeholder="$200"></input>
+                <label for="togetherWith">Who do you want to go with:</label>
+                <select id="togetherWith" name="with">
+                   <option value = "Alone">Alone</option>
+                   <option value = "Friend">With friend/friends</option>
+                   <option value = "GFBF">Girlfriend/Boyfriend</option>
+                   <option value = "Family">Family</option>
+                 </select>
+                <label for="details">Add your detailed imformation:</label>
+                <textarea id="details" type="text" name="details"></textarea>
+                <input type="submit" value="POST this WTD" class="btn btn-primary postNew"></input>
+            </form>
+        </div>
+
+        <div id="newWTD">
+        </div>
+
+        {{#each user.myWTDs}}
+            <div class="row WTD" wtd-id={{_id}}>
+                <div class="dataWTD col-md-6 col-md-offset-3" >
+                    <img class="postImg" src= {{../user.profilePicture}}></img>
+                    <p>{{city}}!!!SHOULD BE HERE!!!</p>
+                    <input type="button" class="delete" value="Delete"></input>
+                </div>
+            </div>
+        {{/each}}
+    </div>
+</body>
+
+</html>

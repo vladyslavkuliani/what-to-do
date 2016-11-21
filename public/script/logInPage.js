@@ -11,8 +11,7 @@ $(document).ready(function() {
       method: 'POST',
       url: '/newAccount',
       data: $('.singUpForm').serialize(),
-      dataType: 'json',
-      success: show
+      dataType: 'json'
     });
   });
 
@@ -23,13 +22,13 @@ $(document).ready(function() {
       url: '/logIn',
       data: $('.logInForm').serialize(),
       dataType: 'json',
-      success: show
+      success: goToProfile
     });
   });
 });
 
-function show(json){
+function goToProfile(json){
   if(json){
-    window.location.href = "/profile";
+    window.location.href = "/profile/"+json._id;
   }
 }
