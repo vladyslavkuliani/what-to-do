@@ -1,7 +1,18 @@
-<div class="row WTD" wtd-id={{wtd._id}}>
+<div class="row WTD" wtd-id= {{wtd._id}}>
     <div class="dataWTD col-md-6 col-md-offset-3">
-        <img class="postImg" src= {{user.profilePicture}}></img>
-        <p>{{{wtd.city}}}!!!SHOULD BE HERE!!!</p>
-        <input type="button" class="delete" value="Delete"></input>
+        <img class="postImg" src={{user.profilePicture}}></img>
+        <p>{{user.fullName}} doesn't know What To Do {{wtd.withWho}} in {{wtd.city}} at {{wtd.timeStart}}-{{wtd.timeEnd}}</p>
+        <p>Details about this WTD: {{wtd.details}}</p>
+        <input type="button" class="delete btn-danger" value="Delete"></input>
+        <hr>
+        <div>
+        {{#each wtd.recommendations}}
+        <div class="recommendations row">
+                <div class="postRecommendationImg col-md-offset-1" style="background-image:url({{userProfilePicture}})"></div>
+                <p class="recommendations-container col-md-10">{{comment}}</p><br>
+        </div>
+        {{/each}}
+      </div>
+        <img class="postRecommendationImg" src={{user.profilePicture}}></img><textarea class="form-control recommendation-input" placeholder="Write your recommendation or comment..."></textarea>
     </div>
 </div>

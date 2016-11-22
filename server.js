@@ -13,6 +13,7 @@ app.use(session({
     } // 30 minute cookie lifespan (in milliseconds)
 }));
 
+var Handlebars = require('handlebars');
 var hbs = require('express-hbs');
 app.engine('hbs', hbs.express4({
     partialsDir: __dirname + '/view'
@@ -41,11 +42,14 @@ app.post('/newAccount', function(req, res) {
 });
 
 app.get('/logIn', function(req, res) {
-    db.User.findOne({
-        userName: req.query.userName
-    }, function(err, user) {
-        req.session.userId = user._id;
-        res.json(user);
+    db.User.findOne({userName: req.query.userName}, function(err, user) {
+        if(user!=null){
+          req.session.userId = user._id;
+          res.json(user);
+        }
+        else {
+          res.redirect('/');
+        }
     });
 });
 
@@ -78,15 +82,15 @@ app.get('/profile/:id', function(req, res) {
 app.post('/createWTD', function(req, res) {
     var newWTD = new db.WTD({
         city: req.body.city,
-        // timeStart: req.query.timeStart,
-        // timeEnd: req.query.timeEnd,
+        timeStart: req.body.timeStart,
+        timeEnd: req.body.timeEnd,
         budget: req.body.budget,
-        with: req.body.with,
+        withWho: req.body.with,
         details: req.body.details
     });
     newWTD.save();
 
-    console.log(req.body.userId);
+    console.log(newWTD);
     db.User.findOne({_id: req.body.userId}, function(err, user) {
       if(err) {return console.log("ERROR!!!");}
         user.myWTDs.unshift(newWTD._id);
@@ -202,6 +206,23 @@ app.get('/followers', function(req,res){
 app.post('/logout', function(req, res){
   req.session.userId = null;
   res.json({});
+});
+
+app.post('/newcomment', function(req, res){
+  db.User.findOne({_id:req.session.userId}, function(err, user){
+    var newRecommendation = new db.Recommendation({
+      userProfilePicture: user.profilePicture,
+      comment: req.body.comment
+    });
+    newRecommendation.save();
+
+    db.WTD.findOne({_id: req.body.wtdId}, function(err, wtd){
+      wtd.recommendations.push(newRecommendation);
+      wtd.save();
+
+      res.render('recommendation', {recommendation:newRecommendation});
+    });
+  });
 });
 
 app.listen(process.env.PORT || 3000, function() {

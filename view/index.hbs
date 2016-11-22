@@ -14,23 +14,24 @@
 </head>
 
 <body>
-  <div class="row headerBar" data-userId= {{user._id}}>
-    <p class="logOut">Log Out</p>
-  </div>
-  <div class="">
-      <ul class="menuBar">
-          <li><a href="/find-friends" class="otherUsers">See Other Users</a></li>
-          <li><a href="#">Recently added WTDs</a></li>
-          <li><a href="#" class="myProfile" >Home</a></li>
-          <li><a href="/followers">Followers</a></li>
-          <li><a href="/following">Following</a></li>
-      </ul>
-  </div>
+    <div class="row headerBar" data-userId= {{user._id}}>
+        <p class="logOut">Log Out</p>
+    </div>
+    <div class="">
+        <ul class="menuBar">
+            <li><a href="/find-friends" class="otherUsers">See Other Users</a></li>
+            <li><a href="#">Recently added WTDs</a></li>
+            <li><a href="#" class="myProfile">Home</a></li>
+            <li><a href="/followers">Followers</a></li>
+            <li><a href="/following">Following</a></li>
+        </ul>
+    </div>
     <div class="container-fluid content">
         <div class="header row">
             <!-- <div class="row headerBar"></div> -->
             <div class="col-md-2 col-md-offset-1 profileLeft">
-                <div id="profilePicture" style="background-image: url({{user.profilePicture}})"><img class="gears-img" src="/images/gears.png"></img></div>
+                <div id="profilePicture" style="background-image: url({{user.profilePicture}})">
+                </div>
                 <button id="edit" class="btn btn-info">Edit</button>
             </div>
             <div class="col-md-6 info">
@@ -54,12 +55,7 @@
                 <label for="budget">Enter budget:</label>
                 <input id="budget" name="budget" type="text" placeholder="$200"></input>
                 <label for="togetherWith">Who do you want to go with:</label>
-                <select id="togetherWith" name="with">
-                   <option value = "Alone">Alone</option>
-                   <option value = "Friend">With friend/friends</option>
-                   <option value = "GFBF">Girlfriend/Boyfriend</option>
-                   <option value = "Family">Family</option>
-                 </select>
+                <input id="togetherWith" name="with" type="text" placeholder="Alone, Friends etc."></input>
                 <label for="details">Add your detailed imformation:</label>
                 <textarea id="details" type="text" name="details"></textarea>
                 <input type="submit" value="POST this WTD" class="btn btn-primary postNew"></input>
@@ -71,12 +67,21 @@
 
         {{#each user.myWTDs}}
             <div class="row WTD" wtd-id={{_id}}>
-                <div class="dataWTD col-md-6 col-md-offset-3" >
-                    <img class="postImg" src= {{../user.profilePicture}}></img>
-                    <p>{{city}}!!!SHOULD BE HERE!!!</p>
+                <div class="dataWTD col-md-6 col-md-offset-3">
+                    <img class="postImg" src={{../user.profilePicture}}></img>
+                    <p>{{../user.fullName}} doesn't know What To Do {{withWho}}  in {{city}} at {{timeStart}}-{{timeEnd}}</p>
+                    <p>Details about this WTD: {{details}}</p>
                     <input type="button" class="delete btn-danger" value="Delete"></input>
                     <hr>
-                    <img class="postRecommendationImg" src= {{../user.profilePicture}}></img><textarea class="form-control recommendation-input" placeholder="Write your recommendation or comment..."></textarea>
+                    <div>
+                    {{#each recommendations}}
+                    <div class="recommendations row">
+                            <div class="postRecommendationImg col-md-offset-1" style="background-image:url({{userProfilePicture}})"></div>
+                            <p class="recommendations-container col-md-10">{{comment}}</p><br>
+                    </div>
+                    {{/each}}
+                  </div>
+                    <img class="postRecommendationImg" src={{../user.profilePicture}}></img><textarea class="form-control recommendation-input" placeholder="Write your recommendation or comment..."></textarea>
                 </div>
             </div>
         {{/each}}

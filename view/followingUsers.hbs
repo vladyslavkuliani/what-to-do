@@ -14,18 +14,18 @@
 </head>
 
 <body>
-  <div class="row headerBar" data-userId= {{user._id}}>
-    <p class="logOut">Log Out</p>
-  </div>
-  <div class="">
-      <ul class="menuBar">
-          <li><a href="/find-friends" class="otherUsers">See Other Users</a></li>
-          <li><a href="#">Recently added WTDs</a></li>
-          <li><a href="#" class="myProfile" >Home</a></li>
-          <li><a href="/followers">Followers</a></li>
-          <li><a href="/following">Following</a></li>
-      </ul>
-  </div>
+    <div class="row headerBar" data-userId= {{user._id}}>
+        <p class="logOut">Log Out</p>
+    </div>
+    <div class="">
+        <ul class="menuBar">
+            <li><a href="/find-friends" class="otherUsers">See Other Users</a></li>
+            <li><a href="#">Recently added WTDs</a></li>
+            <li><a href="#" class="myProfile">Home</a></li>
+            <li><a href="/followers">Followers</a></li>
+            <li><a href="/following">Following</a></li>
+        </ul>
+    </div>
     <div class="container-fluid content">
         <div class="header row">
             <!-- <div class="row headerBar"></div> -->
@@ -47,11 +47,20 @@
         </div>
 
         {{#each user.myWTDs}}
-            <div class="row WTD" wtd-id={{_id}}>
-                <div class="dataWTD col-md-6 col-md-offset-3" >
+            <div class="row WTD" wtd-id= {{_id}}>
+                <div class="dataWTD col-md-6 col-md-offset-3">
                     <img class="postImg" src= {{../user.profilePicture}}></img>
-                    <p>{{city}}!!!SHOULD BE HERE!!!</p>
+                    <p>{{../user.fullName}} doesn't know What To Do {{withWho}} in {{city}} at {{timeStart}}-{{timeEnd}}</p>
+                    <p>Details about this WTD: {{details}}</p>
                     <hr>
+                    <div>
+                    {{#each recommendations}}
+                    <div class="recommendations row">
+                            <div class="postRecommendationImg col-md-offset-1" style="background-image:url({{userProfilePicture}})"></div>
+                            <p class="recommendations-container col-md-10">{{comment}}</p><br>
+                    </div>
+                    {{/each}}
+                  </div>
                     <img class="postRecommendationImg" src={{../loggedin.profilePicture}}></img><textarea class="form-control recommendation-input" placeholder="Write your recommendation or comment..."></textarea>
                 </div>
             </div>

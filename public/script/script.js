@@ -69,7 +69,29 @@ $(document).ready(function() {
         dataType: 'json',
         success: logOut
       });
-    })
+    });
+
+    $(document).on('keypress','.recommendation-input', function() {
+      var key = window.event.keyCode;
+      var textarea = $(this);
+      //when pressed Enter
+      if(key === 13 && textarea.val().trim().length != 0){
+        $.ajax({
+          method:'POST',
+          url: '/newcomment',
+          data: 'wtdId=' + $(this).parent().parent().attr('wtd-id') + "&comment=" + textarea.val().trim(),
+          dataType: 'html',
+          success: function(html){
+            textarea.prev().prev().append(html);
+            textarea.val("");
+          }
+        });
+      }
+    });
+
+    $('#edit').on('click', function(){
+      
+    });
 });
 
 function logOut(json){

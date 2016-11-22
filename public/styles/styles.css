@@ -55,15 +55,20 @@ body{
 .postImg{
   width: 60px;
   height: 60px;
+  float: left;
 }
 
 .postRecommendationImg{
+  clear: left;
   float: left;
   width: 40px;
   height: 40px;
+  background-size: cover;
+  background-position: center;
 }
 
 .recommendation-input{
+  resize: none;
   width: 93%;
   margin-left: 50px;
 }
@@ -103,4 +108,15 @@ body{
 .logOut:hover{
   background: rgba(101, 57, 112, 1);
   cursor: pointer;
+}
+
+.recommendations{
+  margin: 10px auto;
+}
+
+.recommendations-container{
+  margin-left: 10px;
+  border: 2px solid grey;
+  border-radius: 5px;
+  min-height: 40px;
 }
