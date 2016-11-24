@@ -35,11 +35,11 @@
                 <button id="edit" class="btn btn-info">Edit</button>
             </div>
             <div class="col-md-6 info">
-                <p>{{user.fullName}}</p>
-                <p>Date of birth:{{user.dob}}<a>Edit</a></p>
-                <p>Email:{{user.email}}</p>
-                <p>Phone Number:{{user.phoneNumber}}</p>
-                <p>Languages:{{user.languages}}</p>
+                <h3><p id="fullName">{{user.fullName}}</p></h3>
+                <p>Date of birth: <span id="dob">{{user.dob}}</span></p>
+                <p>Email: <span id="email">{{user.email}}</span></p>
+                <p>Phone Number: <span id="phoneNumber">{{user.phoneNumber}}</span></p>
+                <p>Languages: <span id="languages">{{user.languages}}</span></p>
             </div>
         </div>
         <hr>
@@ -85,6 +85,51 @@
                 </div>
             </div>
         {{/each}}
+
+        <div class="modal fade" role="dialog" id="editProfile">
+          <div class="modal-dialog">
+            <div class="modal-content">
+              <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                <h3 class="modal-title">Change your personal Info</h3>
+            </div>
+            <div class="modal-body">
+                <form id="formToUpdate">
+                <div class="form-group">
+                    <div class="row">
+                    <label class="col-md-5">Your profile picture URL:</label>
+                    <input class="col-md-6" type="text" placeholder="http://yourpicture.com" name="profilePicture"></input><br>
+                  </div>
+                  <div class="row">
+                    <label class="col-md-5 control-label">Change your name:</label>
+                    <input class="col-md-6" type="text" name="fullName"></input>
+                  </div>
+                  <div class="row">
+                    <label class="col-md-5 control-label">Change your date of birth:</label>
+                    <input class="col-md-6" type="text" placeholder="11.03.1994" name="dob"></input>
+                  </div>
+                  <div class="row">
+                    <label class="col-md-5 control-label">Change your email:</label>
+                    <input class="col-md-6" type="text" placeholder="your@email.com" name="email"></input>
+                  </div>
+                  <div class="row">
+                    <label class="col-md-5 control-label">Change your phoneNumber:</label>
+                    <input class="col-md-6" type="text" placeholder="(xxx)-xxx-xxxx" name="phoneNumber"></input>
+                  </div>
+                  <div class="row">
+                    <label class="col-md-5 control-label">Add languages you know:</label>
+                    <input class="col-md-6" type="text" name="languages"></input>
+                  </div>
+              </div>
+            </form>
+              </div>
+              <div class="modal-footer">
+                    <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+                    <button type="button" class="btn btn-primary" id="updateProfile">Save changes</button>
+                </div>
+            </div>
+        </div>
+        </div>
     </div>
 </body>
 

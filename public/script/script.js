@@ -90,9 +90,38 @@ $(document).ready(function() {
     });
 
     $('#edit').on('click', function(){
-      
+      $('#editProfile').modal();
+      $('input[name="profilePicture"]').val($('#profilePicture').css('background-image').replace('url("', '').replace('")', ""));
+      $('input[name="fullName"]').val($('#fullName').text());
+      $('input[name="dob"]').val($('#dob').text());
+      $('input[name="email"]').val($('#email').text());
+      $('input[name="phoneNumber"]').val($('#phoneNumber').text());
+      $('input[name="languages"]').val($('#languages').text());
+    });
+
+    $('#updateProfile').on('click', function(){
+      $.ajax({
+        method: 'POST',
+        url: '/update',
+        data: $('#formToUpdate').serialize(),
+        dataType:'json',
+        success: updateInfo
+      });
     });
 });
+
+function updateInfo(json){
+  if(json.profilePicture != ""){
+  $('#profilePicture').css('background-image', "url("+json.profilePicture+")");
+}
+if(json.fullName != ""){
+  $('#fullName').text(json.fullName);
+}
+  $('#dob').text(json.dob);
+  $('#email').text(json.email);
+  $('#phoneNumber').text(json.phoneNumber);
+  $('#languages').text(json.languages);
+}
 
 function logOut(json){
   window.location.href = "/";

@@ -120,3 +120,7 @@ body{
   border-radius: 5px;
   min-height: 40px;
 }
+
+#editProfile{
+  margin: 0 auto;
+}

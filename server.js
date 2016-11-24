@@ -225,6 +225,14 @@ app.post('/newcomment', function(req, res){
   });
 });
 
+app.post('/update', function(req, res){
+  db.User.findOneAndUpdate({_id:req.session.userId}, req.body, function(err, prevVersion){});
+  db.User.findOne({_id:req.session.userId}, function(err, user){
+    if(err){return console.log(err);}
+    res.json(user);
+  });
+});
+
 app.listen(process.env.PORT || 3000, function() {
     console.log('Express server is running on http://localhost:3000/');
 });
