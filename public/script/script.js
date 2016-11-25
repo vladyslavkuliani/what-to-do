@@ -142,7 +142,7 @@ function show(newWTD) {
 }
 
 function deletePost(json) {
-    $("div[wtd-id=" + json[0]._id + "]").remove();
+    $("div[wtd-id=" + json._id + "]").remove();
 }
 
 function showUsers(html) {

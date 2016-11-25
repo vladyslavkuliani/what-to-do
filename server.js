@@ -90,7 +90,6 @@ app.post('/createWTD', function(req, res) {
     });
     newWTD.save();
 
-    console.log(newWTD);
     db.User.findOne({_id: req.body.userId}, function(err, user) {
       if(err) {return console.log("ERROR!!!");}
         user.myWTDs.unshift(newWTD._id);
@@ -111,8 +110,14 @@ app.post('/delete-post', function(req, res){
     user.save();
   });
 
-  db.WTD.find({_id: req.body.wtdId}, function(err, wtd){
-    db.WTD.remove({_id: req.body.wtdId}, function(err, deleted){
+  db.WTD.findOne({_id: req.body.wtdId}, function(err, wtd){
+    wtd.recommendations.forEach(function(rec){
+      db.Recommendation.remove({_id: rec._id}, function(err, deletedRec){
+        if(err){return console.log("Can't delete this comment");}
+      });
+    });
+
+    db.WTD.remove({_id: req.body.wtdId}, function(err, deletedWTD){
       if(err){return console.log("ERROR!");}
     });
     res.json(wtd);
