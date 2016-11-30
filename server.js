@@ -1,5 +1,6 @@
 var express = require('express');
 var app = express();
+var User = require('./models/user');
 
 var db = require('./models');
 
@@ -33,23 +34,20 @@ app.get('/', function logInPage(req, res) {
 });
 
 app.post('/newAccount', function(req, res) {
-    var newUser = new db.User({
-        profilePicture: "../images/defaultProfilePicture.jpg",
-        userName: req.body.userName,
-        fullName: req.body.fullName
+    User.createSecure(req.body.email, req.body.password, req.body.firstName, req.body.lastName, function (err, user) {
+      res.json(user);
     });
-    newUser.save();
+});
+
+app.get('/signup', function (req, res) {
+  res.sendFile(__dirname + '/view/signup.html');
 });
 
 app.get('/logIn', function(req, res) {
-    db.User.findOne({userName: req.query.userName}, function(err, user) {
-        if(user!=null){
-          req.session.userId = user._id;
-          res.json(user);
-        }
-        else {
-          res.redirect('/');
-        }
+    User.authenticate(req.query.email, req.query.password, function (err, user) {
+      if(err){return console.log(err);}
+      req.session.userId = user._id;
+      res.json(user);
     });
 });
 

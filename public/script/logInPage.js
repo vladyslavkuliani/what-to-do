@@ -15,17 +15,21 @@ $(document).ready(function() {
     });
   });
 
-  $('.logIn').on('click', function() {
-    event.preventDefault();
-    $.ajax({
-      method: 'GET',
-      url: '/logIn',
-      data: $('.logInForm').serialize(),
-      dataType: 'json',
-      success: goToProfile
-    });
+  $('.logInForm').submit(function(){
+      $.ajax({
+        method: 'GET',
+        url: '/logIn',
+        data: $('.logInForm').serialize(),
+        dataType: 'json',
+        success: goToProfile,
+        error: cantLogin
+      });
   });
 });
+
+function cantLogin(xhr, ajaxOptions, thrownError){
+  alert("Incorrect email or password! Please try again!");
+}
 
 function goToProfile(json){
   if(json){
