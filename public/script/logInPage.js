@@ -15,7 +15,8 @@ $(document).ready(function() {
     });
   });
 
-  $('.logInForm').submit(function(){
+  $('.logInForm').submit(function(event){
+      event.preventDefault();
       $.ajax({
         method: 'GET',
         url: '/logIn',
