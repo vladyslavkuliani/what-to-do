@@ -45,19 +45,19 @@
         <hr>
         <div class="row">
             <p>Don't know What To Do? <a>Ask your Friends!</a></p>
-            <form class="newWTD">
+            <form class="newWTD col-md-6 col-md-offset-3">
                 <p>New WTD</p>
                 <label for="city">Enter the City you are interested in:</label>
-                <input id="city" name="city" type="text" placeholder="San Francisco"></input>
+                <input id="city" class="form-control" name="city" type="text" placeholder="San Francisco"></input>
                 <label for="time">Select a time interval:</label> Start:
-                <input id="time" name="timeStart" type="time"></input>
-                Finish:<input id="time" name="timeEnd" type="time"></input>
+                <input id="time" class="form-control" name="timeStart" type="time"></input>
+                Finish:<input id="time" class="form-control" name="timeEnd" type="time"></input>
                 <label for="budget">Enter budget:</label>
-                <input id="budget" name="budget" type="text" placeholder="$200"></input>
+                <input id="budget" class="form-control" name="budget" type="text" placeholder="$200"></input>
                 <label for="togetherWith">Who do you want to go with:</label>
-                <input id="togetherWith" name="with" type="text" placeholder="Alone, Friends etc."></input>
+                <input id="togetherWith" class="form-control" name="with" type="text" placeholder="Alone, Friends etc."></input>
                 <label for="details">Add your detailed imformation:</label>
-                <textarea id="details" type="text" name="details"></textarea>
+                <textarea id="details" class="form-control" type="text" name="details"></textarea>
                 <input type="submit" value="POST this WTD" class="btn btn-primary postNew"></input>
             </form>
         </div>
