@@ -183,14 +183,29 @@ app.post('/unfollow', function(req, res){
 });
 
 app.get('/following', function(req, res){
+  // var following = [];
+  // db.User.findOne({_id: req.session.userId}, function(err, user){
+  //   user.following.forEach(function(followingId){
+  //     db.User.findOne({_id:followingId}, function(err, user1){
+  //       following.push(user1);
+  //     });
+  //   });
+  //   res.render('searchUsers', {users: following});
+  // });
+
   var following = [];
   db.User.findOne({_id: req.session.userId}, function(err, user){
-    user.following.forEach(function(followingId){
+    user.following.map(function(followingId){
       db.User.findOne({_id:followingId}, function(err, user1){
-        following.push(user1);
-      });
+          following.push(user1);
+          res.render('searchUsers', {users: following});
+        });
     });
-    res.render('searchUsers', {users: following});
+    // user.following.forEach(function(followingId){
+    //   db.User.findOne({_id:followingId}, function(err, user1){
+    //     following.push(user1);
+    //   });
+    // });
   });
 });
 
