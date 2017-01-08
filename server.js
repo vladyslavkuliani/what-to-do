@@ -1,5 +1,6 @@
 var express = require('express');
 var app = express();
+var CircularJSON = require('circular-json');
 var User = require('./models/user');
 
 var db = require('./models');
@@ -192,21 +193,24 @@ app.get('/following', function(req, res){
   //   });
   //   res.render('searchUsers', {users: following});
   // });
-
   var following = [];
-  db.User.findOne({_id: req.session.userId}, function(err, user){
-    user.following.map(function(followingId){
+
+  function pushFollowings(user){
+    user.following.forEach(function(followingId){
       db.User.findOne({_id:followingId}, function(err, user1){
-          following.push(user1);
-          res.render('searchUsers', {users: following});
-        });
+        following.push(user1);
+      });
     });
-    // user.following.forEach(function(followingId){
-    //   db.User.findOne({_id:followingId}, function(err, user1){
-    //     following.push(user1);
-    //   });
-    // });
-  });
+  }
+
+  function renderFollowings(following){
+    res.render('searchUsers', {users: following});
+  }
+
+    db.User.findOne({_id: req.session.userId}, function(err, user){
+      pushFollowings(user);
+      renderFollowings(following);
+    });
 });
 
 app.get('/followers', function(req,res){
