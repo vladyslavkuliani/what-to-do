@@ -184,44 +184,45 @@ app.post('/unfollow', function(req, res){
 });
 
 app.get('/following', function(req, res){
-  // var following = [];
-  // db.User.findOne({_id: req.session.userId}, function(err, user){
-  //   user.following.forEach(function(followingId){
-  //     db.User.findOne({_id:followingId}, function(err, user1){
-  //       following.push(user1);
-  //     });
-  //   });
-  //   res.render('searchUsers', {users: following});
-  // });
   var following = [];
-
-  function pushFollowings(user){
-    user.following.forEach(function(followingId){
-      db.User.findOne({_id:followingId}, function(err, user1){
-        following.push(user1);
+  var allUsers;
+  db.User.findOne({_id: req.session.userId}, function(err, user){
+    allUsers = user.following.length;
+    if(allUsers===0){
+      res.render('searchUsers', {users: following});
+    }
+    else{
+      user.following.forEach(function(followingId){
+        db.User.findOne({_id: followingId}, function(err, foundUser){
+          following.push(foundUser);
+          if(following.length === allUsers){
+            res.render('searchUsers', {users: following});
+          }
+        });
       });
-    });
-  }
-
-  function renderFollowings(following){
-    res.render('searchUsers', {users: following});
-  }
-
-    db.User.findOne({_id: req.session.userId}, function(err, user){
-      pushFollowings(user);
-      renderFollowings(following);
-    });
+    }
+  });
 });
 
 app.get('/followers', function(req,res){
   var followers = [];
+  var allUsers;
+
   db.User.findOne({_id: req.session.userId}, function(err, user){
-    user.followers.forEach(function(follower){
-      db.User.findOne({_id:follower}, function(err, user1){
-        followers.push(user1);
+    allUsers = user.followers.length;
+    if(allUsers===0){
+      res.render('searchUsers', {users: followers});
+    }
+    else{
+      user.followers.forEach(function(followerId){
+        db.User.findOne({_id: followerId}, function(err, foundUser){
+          followers.push(foundUser);
+          if(followers.length === allUsers){
+            res.render('searchUsers', {users: followers});
+          }
+        });
       });
-    });
-    res.render('searchUsers', {users: followers});
+    }
   });
 });
 
